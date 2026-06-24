@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ishwariya – Interview Prep Kit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --navy: #0f1f3d;
+    --teal: #0d7b6e;
+    --teal-light: #e6f4f2;
+    --gold: #c9922a;
+    --gold-light: #fdf6ea;
+    --cream: #fafaf7;
+    --ink: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 28px 20px 24px;
+    text-align: center;
+  }
+  header .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #94c5c0;
+    margin-bottom: 6px;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: white;
+    margin-bottom: 4px;
+  }
+  header p {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 4px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto;
+    padding: 12px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab.active {
+    color: #5dd6ca;
+    border-bottom-color: #5dd6ca;
+  }
+
+  /* CONTENT */
+  .content { display: none; padding: 20px 16px 60px; max-width: 700px; margin: 0 auto; }
+  .content.active { display: block; }
+
+  /* INTRO CARD */
+  .intro-version {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .intro-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--navy);
+    cursor: pointer;
+  }
+  .intro-header .title {
+    font-weight: 600;
+    color: white;
+    font-size: 14px;
+  }
+  .intro-header .badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--gold);
+    color: white;
+  }
+  .intro-body {
+    padding: 18px;
+    display: none;
+  }
+  .intro-body.open { display: block; }
+  .intro-text {
+    background: var(--teal-light);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #0f3d38;
+    margin-bottom: 12px;
+  }
+  .tip {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--gold);
+  }
+  .tip strong { color: var(--gold); }
+
+  /* Q&A */
+  .round-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 24px 0 10px;
+    padding-left: 2px;
+  }
+  .qa-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .qa-q {
+    padding: 14px 18px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--navy);
+  }
+  .qa-q .num {
+    flex: 0 0 24px;
+    height: 24px;
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .qa-a {
+    display: none;
+    padding: 0 18px 16px 52px;
+  }
+  .qa-a.open { display: block; }
+  .answer-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #374151;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid #e9f0f8;
+  }
+  .answer-text .highlight {
+    background: var(--teal-light);
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  /* RESUME ANALYSIS */
+  .analysis-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .analysis-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .analysis-card h3 .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .icon.green { background: #d1fae5; }
+  .icon.yellow { background: #fef3c7; }
+  .icon.red { background: #fee2e2; }
+  .icon.blue { background: #dbeafe; }
+
+  .pill-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .pill.good { background: #d1fae5; color: #065f46; }
+  .pill.warn { background: #fef3c7; color: #92400e; }
+  .pill.bad { background: #fee2e2; color: #991b1b; }
+  .pill.info { background: #dbeafe; color: #1e40af; }
+
+  .score-bar {
+    margin-top: 10px;
+  }
+  .score-bar .label { font-size: 12px; color: var(--muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .bar-bg { background: #e5e7eb; border-radius: 99px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
+  .bar-fill.high { background: var(--teal); }
+  .bar-fill.mid { background: var(--gold); }
+  .bar-fill.low { background: #f87171; }
+
+  ul.list { padding-left: 4px; list-style: none; }
+  ul.list li { font-size: 13px; color: #374151; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; border-bottom: 1px solid #f3f4f6; }
+  ul.list li:last-child { border-bottom: none; }
+  ul.list li .dot { flex: 0 0 6px; height: 6px; width: 6px; border-radius: 50%; margin-top: 7px; }
+  ul.list li .dot.green { background: #10b981; }
+  ul.list li .dot.yellow { background: #f59e0b; }
+  ul.list li .dot.red { background: #ef4444; }
+
+  /* Chevron */
+  .chevron { margin-left: auto; color: #9ca3af; font-size: 12px; transition: transform 0.2s; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Interview Prep Kit</div>
+  <h1>Ishwariya Nirmala</h1>
+  <p>Production Support Engineer · M2P Fintech · Chennai</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('intro')">🎤 Self Intro</div>
+  <div class="tab" onclick="showTab('r1')">Round 1 – HR</div>
+  <div class="tab" onclick="showTab('r2')">Round 2 – Technical</div>
+  <div class="tab" onclick="showTab('analysis')">📋 Resume Analysis</div>
+</div>
+
+<!-- SELF INTRO TAB -->
+<div class="content active" id="tab-intro">
+  <p class="section-title">Self Introduction</p>
+  <p class="section-sub">Tap each version to expand. Practise reading aloud.</p>
+
+  <div class="intro-version">
+    <div class="intro-header" onclick="toggleIntro('i1')">
+      <span class="title">⏱ 1-Minute Version — Quick Intro</span>
+      <span class="badge">1 MIN</span>
+    </div>
+    <div class="intro-body" id="i1">
+      <div class="intro-text">
+        "Good morning! My name is Ishwariya Nirmala, and I'm a Production Support Engineer currently working at M2P Fintech in Chennai. I have around 3 years of experience in production support and service resolution roles.<br><br>
+        My core skills are <strong>SQL/MySQL, AWS CloudWatch, API testing with Postman, and monitoring tools like Grafana</strong>. I work in the fintech domain, specifically around LMS, LOS, NBFC, and MFI systems.<br><br>
+        In my current role, I handle support tickets, diagnose production incidents, write SQL queries for reporting, and maintain SLA compliance. I'm excited about this opportunity and confident my background aligns well with your team's needs."
+      </div>
+      <div class="tip"><strong>💡 Tip:</strong> Use this when the interviewer says "Tell me briefly about yourself." Keep it under 60 seconds, speak slowly and clearly.</div>
+    </div>
+  </div>
+
+  <div class="intro-version">
+    <div class="intro-header" onclick="toggleIntro('i2')">
+      <span class="title">⏱ 2-Minute Version — Standard Intro</span>
+      <span class="badge">2 MIN</span>
+    </div>
+    <div class="intro-body" id="i2">
+      <div class="intro-text">
+        "Good morning! My name is Ishwariya Nirmala. I'm a Production Support Engineer with close to 3 years of experience in the fintech domain. I'm currently working at M2P Fintech in Chennai, where I've been since January 2024.<br><br>
+        Before this, I worked as an Associate at M2P Fintech from 2022 to 2024, where I focused on compliance support — maintaining records, supporting periodic reviews, and working on AML-related financial regulation adherence. Prior to that, I was a Service Resolution Desk Analyst at Altruist Technologies from 2020 to 2022, where I handled incident tracking, SLA monitoring, and ITSM tools like ServiceNow.<br><br>
+        In my current Production Support role, I write and optimize SQL queries for data validation and reporting, monitor applications using AWS CloudWatch, conduct API testing with Postman, and create daily and weekly dashboards using Grafana and Excel. I close around 5 to 6 support tickets per day while maintaining SLA compliance.<br><br>
+        My domain expertise is in Fintech — LMS, LOS, NBFC, and MFI systems. I'm also comfortable working with tools like Jira and REST APIs.<br><br>
+        I'm looking for a role where I can grow further in production support and contribute to a strong, fast-moving engineering team. Thank you."
+      </div>
+      <div class="tip"><strong>💡 Tip:</strong> This is your main intro — use it for most HR and first-round interviews. Structure: Name → Current Role → Past Experience → Key Skills → Looking For.</div>
+    </div>
+  </div>
+
+  <div class="intro-version">
+    <div class="intro-header" onclick="toggleIntro('i3')">
+      <span class="title">⏱ 5-Minute Version — Deep Intro</span>
+      <span class="badge">5 MIN</span>
+    </div>
+    <div class="intro-body" id="i3">
+      <div class="intro-text">
+        "Good morning! My name is Ishwariya Nirmala, and I'm a Production Support Engineer based in Chennai. I hold a B.Com degree from Cheliammal Women's College, completed in 2020, and I've been working in IT support roles since then — close to 5 years total, with the last 3 years in fintech.<br><br>
+        <strong>My Career Journey:</strong><br>
+        I started my career at Altruist Technologies as a Business Associate and Service Resolution Desk Analyst from 2020 to 2022. There, I was responsible for tracking and resolving service incidents, ensuring SLA compliance, and using ITSM tools like ServiceNow. That role gave me a strong foundation in incident management, communication with stakeholders, and systematic problem-solving.<br><br>
+        From 2022 to January 2024, I worked as an Associate at M2P Fintech. In that role, my focus was on compliance — maintaining accurate records, supporting periodic reviews, and working with compliance teams to ensure adherence to anti-money laundering regulations and other financial compliance standards. This deepened my understanding of financial systems and regulatory frameworks.<br><br>
+        <strong>My Current Role:</strong><br>
+        Since January 2024, I've been working as a Production Support Engineer at M2P Fintech, and this is where I've grown the most technically. My daily work involves writing and optimizing SQL and MySQL queries for data validation, troubleshooting, and report generation. I monitor applications using AWS CloudWatch — capturing logs and resolving alerts. I conduct API testing and validation using Postman on REST APIs. I also create daily and weekly dashboards using Excel and Grafana for stakeholders. I support BNPL credit line products and have developed 2 custom reports per week to support data-driven business decisions. On average, I close 5 to 6 support tickets per day while maintaining SLA compliance. I've also automated repetitive reporting processes, which was acknowledged with excellent feedback in my experience letter from leadership.<br><br>
+        <strong>My Domain:</strong><br>
+        I specialize in the Fintech domain — specifically Loan Origination Systems (LOS), Loan Management Systems (LMS), NBFC, and MFI workflows. This means I understand lending processes end-to-end, from application to disbursement to recovery.<br><br>
+        <strong>Why I'm Here:</strong><br>
+        I'm looking for a Production Support Engineer role where I can leverage my SQL, monitoring, and API testing skills in a larger, more challenging environment. I'm excited about this opportunity at [Company Name] because [mention something specific — e.g., 'your focus on fintech innovation' or 'your strong engineering culture'].<br><br>
+        Thank you for the opportunity. I'm ready to contribute from day one."
+      </div>
+      <div class="tip"><strong>💡 Tip:</strong> Use this for senior panel rounds or when asked "Walk me through your entire experience." Customise the last paragraph with the company's name before each interview.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ROUND 1 HR -->
+<div class="content" id="tab-r1">
+  <p class="section-title">Round 1 – HR Round</p>
+  <p class="section-sub">Behavioural and motivational questions. Tap to see model answers.</p>
+
+  <div class="round-label">Common HR Questions</div>
+
+  <!-- Q1 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q1')">
+      <span class="num">1</span>
+      <span>Why are you looking for a new job?</span>
+      <span class="chevron" id="c-q1">▼</span>
+    </div>
+    <div class="qa-a" id="q1">
+      <div class="answer-text">
+        "I've had a great experience at M2P Fintech — I've grown significantly in SQL, API testing, monitoring, and production support. However, I'm now looking for an opportunity where I can work on <span class="highlight">larger-scale systems</span> with a bigger team, face more complex production challenges, and grow into more senior responsibilities. I'm excited about [Company] because it gives me that opportunity while staying in the fintech domain I love."
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q2')">
+      <span class="num">2</span>
+      <span>What are your strengths?</span>
+      <span class="chevron" id="c-q2">▼</span>
+    </div>
+    <div class="qa-a" id="q2">
+      <div class="answer-text">
+        "My biggest strength is <span class="highlight">problem diagnosis</span> — I'm very good at looking at logs, SQL data, and API responses together to find the root cause of a production issue quickly. I'm also strong in SQL query writing, which helps me generate accurate reports and validate data without always depending on developers. And I'm detail-oriented — in financial systems, accuracy really matters, and I take that seriously."
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q3')">
+      <span class="num">3</span>
+      <span>What are your weaknesses?</span>
+      <span class="chevron" id="c-q3">▼</span>
+    </div>
+    <div class="qa-a" id="q3">
+      <div class="answer-text">
+        "I sometimes spend too much time making sure everything is perfectly validated before escalating an issue. I've been working on balancing thoroughness with speed — especially in high-priority incidents, quick escalation is more valuable than waiting for 100% certainty. I've improved a lot in this area by following a structured triage process."
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q4')">
+      <span class="num">4</span>
+      <span>Tell me about a challenging situation you handled at work.</span>
+      <span class="chevron" id="c-q4">▼</span>
+    </div>
+    <div class="qa-a" id="q4">
+      <div class="answer-text">
+        "Once, we had a production issue where BNPL credit line disbursements were failing for a batch of customers during month-end. The system wasn't throwing clear errors. I pulled the <span class="highlight">AWS CloudWatch logs</span>, compared them with the Postman API response, and ran SQL queries to check the loan account status. I found that a data mismatch between the LOS and LMS was blocking the disbursement. I documented the root cause, coordinated with the dev team for a fix, and sent regular updates to stakeholders — all within 3 hours. The batch was reprocessed successfully."
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q5')">
+      <span class="num">5</span>
+      <span>Where do you see yourself in 3 years?</span>
+      <span class="chevron" id="c-q5">▼</span>
+    </div>
+    <div class="qa-a" id="q5">
+      <div class="answer-text">
+        "In 3 years, I see myself in a <span class="highlight">Senior Production Support Engineer or L2/L3 Support Lead role</span>, handling complex incidents independently and mentoring junior team members. I also want to deepen my cloud skills with AWS certifications and expand into DevOps tooling like CI/CD pipelines and container monitoring."
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q6')">
+      <span class="num">6</span>
+      <span>What is your expected salary?</span>
+      <span class="chevron" id="c-q6">▼</span>
+    </div>
+    <div class="qa-a" id="q6">
+      <div class="answer-text">
+        "Based on my experience, skills, and the market range for Production Support Engineers in Chennai, I'm expecting <span class="highlight">between X and Y LPA</span>. However, I'm open to discussion based on the total compensation package, growth opportunities, and learning that this role offers." <br><br><em style="font-size:12px; color:#9ca3af;">(Fill X and Y with your actual expected range before the interview.)</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('q7')">
+      <span class="num">7</span>
+      <span>Why should we hire you?</span>
+      <span class="chevron" id="c-q7">▼</span>
+    </div>
+    <div class="qa-a" id="q7">
+      <div class="answer-text">
+        "You should hire me because I bring a <span class="highlight">rare combination of technical skills and fintech domain knowledge</span>. Most support engineers have one or the other — but I have strong SQL, AWS CloudWatch, API testing, and Grafana experience, plus deep knowledge of LOS, LMS, NBFC, and MFI workflows from working at M2P Fintech. I'm reliable, SLA-driven, and I've proven I can automate tasks and improve processes proactively, not just react to issues."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROUND 2 TECHNICAL -->
+<div class="content" id="tab-r2">
+  <p class="section-title">Round 2 – Technical Round</p>
+  <p class="section-sub">Role-specific and domain questions. Tap to expand answers.</p>
+
+  <div class="round-label">🛢️ SQL / Database</div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t1')">
+      <span class="num">1</span>
+      <span>Write a query to find duplicate records in a table.</span>
+      <span class="chevron" id="c-t1">▼</span>
+    </div>
+    <div class="qa-a" id="t1">
+      <div class="answer-text">
+        <strong>Answer:</strong><br>
+        <code style="display:block; background:#1e293b; color:#7dd3fc; padding:12px; border-radius:8px; font-size:13px; margin-top:8px; white-space:pre-wrap;">SELECT column_name, COUNT(*) as count
+FROM table_name
+GROUP BY column_name
+HAVING COUNT(*) > 1;</code>
+        <br>In production support, I use this to find duplicate loan applications or duplicate transaction entries that may cause system errors.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t2')">
+      <span class="num">2</span>
+      <span>What is the difference between WHERE and HAVING?</span>
+      <span class="chevron" id="c-t2">▼</span>
+    </div>
+    <div class="qa-a" id="t2">
+      <div class="answer-text">
+        <span class="highlight">WHERE</span> filters rows before grouping. <span class="highlight">HAVING</span> filters after grouping (used with aggregate functions like COUNT, SUM).<br><br>
+        Example: <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:13px;">WHERE status = 'FAILED'</code> filters individual rows. <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:13px;">HAVING COUNT(*) > 5</code> filters groups.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t3')">
+      <span class="num">3</span>
+      <span>Explain INNER JOIN vs LEFT JOIN with an example.</span>
+      <span class="chevron" id="c-t3">▼</span>
+    </div>
+    <div class="qa-a" id="t3">
+      <div class="answer-text">
+        <span class="highlight">INNER JOIN</span> – Returns only matching rows from both tables.<br>
+        <span class="highlight">LEFT JOIN</span> – Returns all rows from the left table + matching rows from right (NULL if no match).<br><br>
+        In fintech: To get all loan applications and their disbursement status — use LEFT JOIN so we see applications that were applied but not yet disbursed.
+      </div>
+    </div>
+  </div>
+
+  <div class="round-label">☁️ AWS CloudWatch & Monitoring</div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t4')">
+      <span class="num">4</span>
+      <span>How do you use AWS CloudWatch in your daily work?</span>
+      <span class="chevron" id="c-t4">▼</span>
+    </div>
+    <div class="qa-a" id="t4">
+      <div class="answer-text">
+        "I use CloudWatch daily for <span class="highlight">application log monitoring and alert resolution</span>. I check log groups for error patterns — like API timeout errors, failed transaction callbacks, or database connection issues. I also use CloudWatch Alarms to get notified when error rates spike. When an alert fires, I drill into the log streams to find the exact request that failed and correlate it with SQL data to identify root cause."
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t5')">
+      <span class="num">5</span>
+      <span>What is the difference between CloudWatch Logs and CloudWatch Metrics?</span>
+      <span class="chevron" id="c-t5">▼</span>
+    </div>
+    <div class="qa-a" id="t5">
+      <div class="answer-text">
+        <span class="highlight">CloudWatch Logs</span> – Stores raw log data from applications (e.g., error messages, API request logs). You search and filter these to debug issues.<br><br>
+        <span class="highlight">CloudWatch Metrics</span> – Numerical time-series data (e.g., CPU usage, error count per minute). Used for dashboards and alarms. Metrics show "how much" — logs show "what exactly happened."
+      </div>
+    </div>
+  </div>
+
+  <div class="round-label">🔌 API Testing</div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t6')">
+      <span class="num">6</span>
+      <span>How do you test an API using Postman in production support?</span>
+      <span class="chevron" id="c-t6">▼</span>
+    </div>
+    <div class="qa-a" id="t6">
+      <div class="answer-text">
+        "When a production issue is reported — for example, 'loan disbursement API is failing' — I open Postman, recreate the exact request using the same payload the customer sent. I check:<br>
+        • <span class="highlight">Status code</span> (200 OK vs 400/500 errors)<br>
+        • <span class="highlight">Response body</span> — error message, field validation failures<br>
+        • <span class="highlight">Headers</span> — auth token validity, content type<br>
+        Then I compare with CloudWatch logs to see if it's a code error or a data error. This helps me give a clear RCA to the dev team."
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t7')">
+      <span class="num">7</span>
+      <span>What are HTTP status codes? Name important ones.</span>
+      <span class="chevron" id="c-t7">▼</span>
+    </div>
+    <div class="qa-a" id="t7">
+      <div class="answer-text">
+        <span class="highlight">200 OK</span> – Success<br>
+        <span class="highlight">201 Created</span> – Resource created<br>
+        <span class="highlight">400 Bad Request</span> – Client sent invalid data<br>
+        <span class="highlight">401 Unauthorized</span> – Auth token missing/invalid<br>
+        <span class="highlight">403 Forbidden</span> – No permission<br>
+        <span class="highlight">404 Not Found</span> – Resource doesn't exist<br>
+        <span class="highlight">500 Internal Server Error</span> – Server-side bug<br>
+        <span class="highlight">502/503</span> – Gateway/service unavailable
+      </div>
+    </div>
+  </div>
+
+  <div class="round-label">🏦 Fintech Domain</div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t8')">
+      <span class="num">8</span>
+      <span>What is the difference between LOS and LMS?</span>
+      <span class="chevron" id="c-t8">▼</span>
+    </div>
+    <div class="qa-a" id="t8">
+      <div class="answer-text">
+        <span class="highlight">LOS (Loan Origination System)</span> – Handles the loan application journey: customer application, credit check, approval/rejection, KYC verification, and loan sanction.<br><br>
+        <span class="highlight">LMS (Loan Management System)</span> – Manages the loan after disbursement: EMI schedules, repayment tracking, overdue management, foreclosure, and reporting.<br><br>
+        In production support, LOS issues are usually related to application failures or KYC API errors. LMS issues are related to EMI posting, balance mismatches, or repayment failures.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t9')">
+      <span class="num">9</span>
+      <span>What is AML and why is it important in fintech?</span>
+      <span class="chevron" id="c-t9">▼</span>
+    </div>
+    <div class="qa-a" id="t9">
+      <div class="answer-text">
+        "AML stands for <span class="highlight">Anti-Money Laundering</span>. It's a set of regulations that financial institutions must follow to detect and prevent the use of their systems for illegal money flows. In my role at M2P Fintech's compliance team, I helped maintain records and supported periodic AML reviews. In production support, if there's a transaction flag from the AML system, it gets escalated to compliance immediately and the transaction is held — understanding this helped me triage such tickets correctly."
+      </div>
+    </div>
+  </div>
+
+  <div class="round-label">🔍 Incident Management</div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t10')">
+      <span class="num">10</span>
+      <span>How do you handle a P1 (critical) production incident?</span>
+      <span class="chevron" id="c-t10">▼</span>
+    </div>
+    <div class="qa-a" id="t10">
+      <div class="answer-text">
+        "My P1 process:<br>
+        1. <span class="highlight">Acknowledge immediately</span> – Pick up the ticket, send an acknowledgement to stakeholders within SLA.<br>
+        2. <span class="highlight">Triage</span> – Check CloudWatch logs, run SQL queries to understand the scope (how many customers affected, what exactly is broken).<br>
+        3. <span class="highlight">Escalate fast</span> – If it's a code issue, I escalate to the dev team with full context: logs, API payload, SQL output.<br>
+        4. <span class="highlight">Communicate</span> – Keep stakeholders updated every 15-30 minutes.<br>
+        5. <span class="highlight">RCA document</span> – After resolution, document root cause, fix, and preventive action."
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-card">
+    <div class="qa-q" onclick="toggleQA('t11')">
+      <span class="num">11</span>
+      <span>What is SLA and how do you track it?</span>
+      <span class="chevron" id="c-t11">▼</span>
+    </div>
+    <div class="qa-a" id="t11">
+      <div class="answer-text">
+        "SLA stands for <span class="highlight">Service Level Agreement</span> — it's the committed response and resolution time for different ticket priorities. For example, P1 might be 1-hour response and 4-hour resolution. I track SLA using <span class="highlight">Jira dashboards</span> and monitoring the ticket aging in our queue. If a ticket is approaching its SLA breach threshold, I escalate or re-prioritise immediately. I've consistently maintained SLA compliance in my current role."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESUME ANALYSIS TAB -->
+<div class="content" id="tab-analysis">
+  <p class="section-title">Resume Analysis</p>
+  <p class="section-sub">Strengths, gaps, and improvement suggestions for Ishwariya's resume.</p>
+
+  <div class="analysis-card">
+    <h3><span class="icon green">✅</span> Strong Points</h3>
+    <ul class="list">
+      <li><span class="dot green"></span>Clear progression: Service Desk → Associate → Production Support Engineer — shows growth.</li>
+      <li><span class="dot green"></span>Specific metrics: "5–6 tickets/day", "2 custom reports/week", "5 to 6 tickets" — very good.</li>
+      <li><span class="dot green"></span>Fintech domain expertise is a rare, high-value skill — well highlighted.</li>
+      <li><span class="dot green"></span>Both technical (SQL, AWS, Postman) and process (SLA, ITSM, AML) skills covered.</li>
+      <li><span class="dot green"></span>Automation of reporting mentioned — shows initiative beyond basic support.</li>
+    </ul>
+  </div>
+
+  <div class="analysis-card">
+    <h3><span class="icon yellow">⚠️</span> Areas to Improve</h3>
+    <ul class="list">
+      <li><span class="dot yellow"></span>No certifications listed — AWS Cloud Practitioner or SQL certification would strengthen the profile.</li>
+      <li><span class="dot yellow"></span>Summary is good but lacks a specific role goal. Add "Seeking Production Support Engineer roles in fintech."</li>
+      <li><span class="dot yellow"></span>Professional Experience 2 (Associate) focuses on compliance — reframe 1-2 bullets to show technical contribution.</li>
+      <li><span class="dot yellow"></span>No GitHub, portfolio, or project links — add if you have any technical projects.</li>
+    </ul>
+  </div>
+
+  <div class="analysis-card">
+    <h3><span class="icon blue">📊</span> Skill Match Score</h3>
+    <div class="score-bar">
+      <div class="label"><span>SQL / MySQL</span><span>90%</span></div>
+      <div class="bar-bg"><div class="bar-fill high" style="width:90%"></div></div>
+    </div>
+    <div class="score-bar" style="margin-top:10px">
+      <div class="label"><span>AWS CloudWatch</span><span>75%</span></div>
+      <div class="bar-bg"><div class="bar-fill high" style="width:75%"></div></div>
+    </div>
+    <div class="score-bar" style="margin-top:10px">
+      <div class="label"><span>API Testing (Postman)</span><span>80%</span></div>
+      <div class="bar-bg"><div class="bar-fill high" style="width:80%"></div></div>
+    </div>
+    <div class="score-bar" style="margin-top:10px">
+      <div class="label"><span>Fintech Domain (LOS/LMS)</span><span>85%</span></div>
+      <div class="bar-bg"><div class="bar-fill high" style="width:85%"></div></div>
+    </div>
+    <div class="score-bar" style="margin-top:10px">
+      <div class="label"><span>Cloud Certification</span><span>0%</span></div>
+      <div class="bar-bg"><div class="bar-fill low" style="width:5%"></div></div>
+    </div>
+  </div>
+
+  <div class="analysis-card">
+    <h3><span class="icon red">🚀</span> Top Add-ons to Boost Resume</h3>
+    <div class="pill-list">
+      <span class="pill warn">AWS Cloud Practitioner (Free path)</span>
+      <span class="pill warn">HackerRank SQL Certificate</span>
+      <span class="pill info">ELK Stack / Kibana basics</span>
+      <span class="pill info">JIRA dashboards — add screenshots to portfolio</span>
+      <span class="pill info">Python basics for automation</span>
+    </div>
+  </div>
+
+  <div class="analysis-card">
+    <h3><span class="icon blue">🎯</span> Best Target Roles for Ishwariya</h3>
+    <div class="pill-list">
+      <span class="pill good">Production Support Engineer</span>
+      <span class="pill good">Application Support Analyst</span>
+      <span class="pill good">L1/L2 Support Engineer</span>
+      <span class="pill good">Fintech Operations Engineer</span>
+      <span class="pill info">Business Analyst (Fintech)</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleQA(id) {
+  const el = document.getElementById(id);
+  const chevron = document.getElementById('c-' + id);
+  el.classList.toggle('open');
+  chevron.classList.toggle('open');
+}
+
+function toggleIntro(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
